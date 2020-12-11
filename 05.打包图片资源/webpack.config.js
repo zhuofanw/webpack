@@ -17,6 +17,7 @@ module.exports = {
                 ]
             },
             {
+                //问题：默认处理不了html中img图片<img>
                 test:/\.(jpeg|png|gif)$/,
                 //需要下载两个loader url-loader file-loader
                 loader:'url-loader',
@@ -26,6 +27,11 @@ module.exports = {
                 //base64缺点：图片体积会更大（文件请求速度更慢）
                     limit: 8*1024
                 }
+            },
+            {
+                test:/\.html$/,
+                //处理html文件的img图片（负责引入img，从而能被url-loader处理）
+                loader:'html-loader'
             }
         ]
     },
